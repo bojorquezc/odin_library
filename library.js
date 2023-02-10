@@ -26,7 +26,9 @@ function Book(title, author, pages, published, status) {
   this.status = status;
 }
 
-addBookForm.addEventListener('submit', () => {
+addBookForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
   const title = document.querySelector('#title').value;
   const author = document.querySelector('#author').value;
   const pages = document.querySelector('#pages').value;
@@ -35,8 +37,6 @@ addBookForm.addEventListener('submit', () => {
 
   const book = new Book(title, author, pages, publishedDate, readStatus);
   myLibrary.push(book);
+  addBookForm.reset();
+  modal.close();
 });
-
-// function addBookToLibrary(book) {
-//   myLibrary.push(book);
-// }
