@@ -127,8 +127,31 @@ hr {
 	width: 100%;
 }
 
-.read-books h3 {
-	padding: 30px;
+.read-card h3 {
+	padding-bottom: 0.5rem;
+}
+
+.read-btns {
+	display: flex;
+    gap: 10px;
+}
+
+.read-tag {
+	display: flex;
+    width: 50%;
+    height: 30px;
+    font-weight: 600;
+    background-color: #8BB987;
+    justify-content: center;
+    align-items: center;
+}
+
+.return-btn {
+    background-color: #4F8F9D;
+    width: 20%;
+    border: none;
+    color: white;
+    font-size: 1rem;
 }
 
 .book-info {
@@ -143,6 +166,10 @@ hr {
 	min-width: 200px;
 	padding: 2rem;
     box-shadow: 0px 4px 10px 0px black;
+}
+
+.read-card {
+	padding: 30px;
 }
 
 .book-info > .book-title {
