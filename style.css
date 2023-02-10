@@ -70,10 +70,85 @@ h3 {
 }
 
 hr {
-		border: 0;
-		border-top: 1px solid #ffffff40;
+	border: 0;
+	border-top: 1px solid #ffffff40;
 }
 
+input {
+    border-radius: 5px;
+    border: solid 1px #a7a7a7;
+    box-sizing: border-box;
+    margin: 8px;
+    padding: 8px 10px;
+    width: 95%;
+}
+
+label {
+    padding: 8px;
+}
+
+form {
+	color: #ffffff;
+	background: linear-gradient(#254C84, #000000);
+    padding: 40px;
+}
+
+form > p {
+	font-size: 1.2rem;
+    font-weight: bold;
+    padding-bottom: 25px;
+    text-align: center;
+}
+
+form > .submit-btn {
+    background-color: #307989;
+    border-radius: 5px;
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    height: 40px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.form-field {
+	padding-bottom: 10px;
+}
+
+.form-close-btn {
+	display: flex;
+    justify-content: flex-end;
+    padding-bottom: 1.4rem;
+}
+
+.form-close-btn > button {
+	border: none;
+    border-radius: 15px;
+    height: 25px;
+    width: 25px;
+    color: #505050;
+    background-color: #b3b3b3;
+}
+
+#read-status {
+    width: 95%;
+    padding: 8px 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: solid 1px #a7a7a7;
+    box-sizing: border-box;
+}
+
+.modal {
+	width: 310px;
+	position: absolute;
+	padding: 0;
+	border: none;
+}
+
+.modal::backdrop {
+	background: rgb(0, 0, 0, 0.6);
+}
 
 .navigation {
 	display: flex;

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
     <script src="https://kit.fontawesome.com/406a12ef4f.js" crossorigin="anonymous"></script>
-    <script src="./index.html" async></script>
+    <script src="./library.js" async></script>
 </head>
 
 <body>
@@ -21,7 +21,39 @@
     </div>
 
     <div class="under-nav">
-        <button>+</button>
+        <button class="add-book-btn">+</button>
+        <dialog class="modal">
+            <form class="add-book-form" method="dialog">
+                <div class="form-close-btn">
+                    <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <p>Add a book to Library</p>
+                <div class="form-field">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" placeholder="Book title">    
+                </div>
+                <div class="form-field">
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" placeholder="Book author">    
+                </div>
+                <div class="form-field">
+                    <label for="pages">Pages:</label>
+                    <input type="number" id="pages" placeholder="Number of pages">    
+                </div>
+                <div class="form-field">
+                    <label for="published-date">Published date:</label>
+                    <input type="number" id="published-date" placeholder="Published date" max="2500">    
+                </div>
+                <div class="read-status form-field">
+                    <label for="read-status">Read status</label>
+                    <select name="read-status" id="read-status">
+                        <option value="read">Read</option>
+                        <option value="not-read">Not Read</option>
+                    </select>  
+                </div>
+                <button type="submit" class="submit-btn">Add Book</button>
+            </form>
+        </dialog>
         <h3>Books To Read: 3</h3>
         <h3>Books Read</h3>
     </div>
