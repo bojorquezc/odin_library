@@ -11,9 +11,6 @@ closeModal.addEventListener('click', () => {
   modal.close();
 });
 
-// Adding book object to array
-
-const addBookForm = document.querySelector('.add-book-form');
 
 // eslint-disable-next-line prefer-const
 let myLibrary = [];
@@ -25,6 +22,9 @@ function Book(title, author, pages, published, status) {
   this.published = published;
   this.status = status;
 }
+
+// Adding book object to array
+const addBookForm = document.querySelector('.add-book-form');
 
 addBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -40,3 +40,24 @@ addBookForm.addEventListener('submit', (e) => {
   addBookForm.reset();
   modal.close();
 });
+
+// Showing library array in main display
+function iterateBooks() {
+  const booksMain = document.querySelector('.books');
+
+  for (book of myLibrary) {
+    const unreadCard = document.createElement('div');
+    unreadCard.classList.add('unread-card')
+    const bookInfo = document.createElement('div');
+    bookInfo.classList.add('book-info');
+    const cardButtons = document.createElement('div');
+    cardButtons.classList.add('card-buttons');
+    const bookTitle = document.createElement('p');
+    bookTitle.classList.add('book-title');
+
+    booksMain.appendChild(unreadCard);
+    unreadCard.appendChild(bookInfo);
+    unreadCard.appendChild(cardButtons);
+    bookInfo.appendChild(bookTitle);
+  }
+}
