@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-syntax */
 // Modal functionality
 const modal = document.querySelector('.modal');
 const openModal = document.querySelector('.add-book-btn');
@@ -11,23 +14,22 @@ closeModal.addEventListener('click', () => {
   modal.close();
 });
 
-
 // eslint-disable-next-line prefer-const
 let myLibrary = [
-  {
-    title: 'Dracula',
-    author: 'Bram Stoker',
-    pages: '418',
-    published: '1897',
-    status: 'Not Read'
-  },
-  {
-    title: 'Don Quixote',
-    author: 'Miguel de Cervantes',
-    pages: '1072',
-    published: '1605',
-    status: 'Not Read'
-  }
+  // {
+  //   title: 'Dracula',
+  //   author: 'Bram Stoker',
+  //   pages: '418',
+  //   published: '1897',
+  //   status: 'Not Read',
+  // },
+  // {
+  //   title: 'Don Quixote',
+  //   author: 'Miguel de Cervantes',
+  //   pages: '1072',
+  //   published: '1605',
+  //   status: 'Not Read',
+  // },
 ];
 
 function Book(title, author, pages, published, status) {
@@ -38,24 +40,23 @@ function Book(title, author, pages, published, status) {
   this.status = status;
 }
 
-// Adding book object to array
-const addBookForm = document.querySelector('.add-book-form');
-
-addBookForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const title = document.querySelector('#title').value;
-  const author = document.querySelector('#author').value;
-  const pages = document.querySelector('#pages').value;
-  const publishedDate = document.querySelector('#published-date').value;
-  const readStatus = document.querySelector('#read-status').value;
-
-  const book = new Book(title, author, pages, publishedDate, readStatus);
-  myLibrary.push(book);
-  addBookForm.reset();
-  iterateBooks();
-  modal.close();
-});
+// Update not read or read button
+function updateReadStatus() {
+  const notReadButtonAll = document.querySelectorAll('.not-read-btn');
+  notReadButtonAll.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (button.textContent === 'Not Read') {
+        button.textContent = 'Read';
+        button.classList.remove('not-read-btn');
+        button.classList.add('read-btn');
+      } else {
+        button.textContent = 'Not Read';
+        button.classList.remove('read-btn');
+        button.classList.add('not-read-btn');
+      }
+    });
+  });
+}
 
 // Showing library array in main display
 function iterateBooks() {
@@ -63,7 +64,7 @@ function iterateBooks() {
 
   for (book of myLibrary) {
     const unreadCard = document.createElement('div');
-    unreadCard.classList.add('unread-card')
+    unreadCard.classList.add('unread-card');
     booksMain.appendChild(unreadCard);
 
     const bookInfo = document.createElement('div');
@@ -102,6 +103,7 @@ function iterateBooks() {
     cardButtons.classList.add('card-buttons');
     unreadCard.appendChild(cardButtons);
 
+    // eslint-disable-next-line no-shadow
     const notReadButton = document.createElement('button');
     cardButtons.appendChild(notReadButton);
     notReadButton.classList.add('not-read-btn');
@@ -122,7 +124,7 @@ function iterateBooks() {
     deleteButton.appendChild(deleteIcon);
     deleteIcon.classList.add('fa-solid');
     deleteIcon.classList.add('fa-xmark');
-    
+
     const bookIndex = myLibrary.indexOf(book);
     bookTitle.textContent = myLibrary[bookIndex].title;
     bookAuthor.textContent = myLibrary[bookIndex].author;
@@ -130,3 +132,35 @@ function iterateBooks() {
     bookPublished.textContent = myLibrary[bookIndex].published;
   }
 }
+
+// Adding book object to array
+const addBookForm = document.querySelector('.add-book-form');
+
+addBookForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const title = document.querySelector('#title').value;
+  const author = document.querySelector('#author').value;
+  const pages = document.querySelector('#pages').value;
+  const publishedDate = document.querySelector('#published-date').value;
+  const readStatus = document.querySelector('#read-status').value;
+
+  const book = new Book(title, author, pages, publishedDate, readStatus);
+
+  const booksMain = document.querySelector('.books');
+
+  myLibrary.push(book);
+  addBookForm.reset();
+  booksMain.replaceChildren();
+  iterateBooks();
+  updateReadStatus();
+
+  // if (book.status === 'read') {
+  //   const notReadButton = document.querySelector('.not-read-btn');
+  //   notReadButton.textContent = 'Read';
+  //   notReadButton.classList.remove('not-read-btn');
+  //   notReadButton.classList.add('read-btn');
+  // }
+
+  modal.close();
+});

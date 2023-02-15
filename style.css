@@ -172,13 +172,14 @@ form > .submit-btn {
 	display: grid;
 	padding-bottom: 2rem;
     align-items: center;
-    grid-template-columns: 10% 60% 30%;
+    grid-template-columns: 25% 1fr 1fr 1fr 25%;
     justify-items: center;
 }
 
-.under-nav > button {
+.add-book-btn {
 	border-radius: 30px;
 	color: #ffffff;
+	grid-column: 2/3;
     background-color: #254C84;
     border-style: none;
     box-shadow: 0px 4px 10px 0px black;
@@ -261,6 +262,15 @@ form > .submit-btn {
 .not-read-btn {
 	width: 70%;
     background-color: #D2954E;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.read-btn {
+	width: 70%;
+    background-color: #2bb15e;
     border: none;
     color: white;
     font-size: 1rem;
