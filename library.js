@@ -42,25 +42,27 @@ function Book(title, author, pages, published, status) {
 }
 
 Book.prototype.read = function () {
-  const notReadButton = document.querySelector('.not-read-btn');
-  notReadButton.addEventListener('click', () => {
-    if (notReadButton.textContent === 'Not Read') {
-      notReadButton.textContent = 'Read';
-      notReadButton.classList.remove('not-read-btn');
-      notReadButton.classList.add('read-btn');
-    } else {
-      notReadButton.textContent = 'Not Read';
-      notReadButton.classList.remove('read-btn');
-      notReadButton.classList.add('not-read-btn');
-    }
+  const toggleReadButton = document.querySelectorAll('.toggle-read-btn');
+  toggleReadButton.forEach((item) => {
+    item.addEventListener('click', () => {
+      if (item.textContent === 'Not Read') {
+        item.textContent = 'Read';
+        item.classList.remove('not-read-btn');
+        item.classList.add('read-btn');
+      } else {
+        item.textContent = 'Not Read';
+        item.classList.remove('read-btn');
+        item.classList.add('not-read-btn');
+      }
+    });
   });
 };
 
 // Showing library array in main display
-function iterateBooks() {
+function displayBook() {
   const booksMain = document.querySelector('.books');
 
-  for (book of myLibrary) {
+  for (item of myLibrary) {
     const unreadCard = document.createElement('div');
     unreadCard.classList.add('unread-card');
     booksMain.appendChild(unreadCard);
@@ -102,10 +104,11 @@ function iterateBooks() {
     unreadCard.appendChild(cardButtons);
 
     // eslint-disable-next-line no-shadow
-    const notReadButton = document.createElement('button');
-    cardButtons.appendChild(notReadButton);
-    notReadButton.classList.add('not-read-btn');
-    notReadButton.textContent = 'Not Read';
+    const toggleReadButton = document.createElement('button');
+    cardButtons.appendChild(toggleReadButton);
+    toggleReadButton.classList.add('toggle-read-btn');
+    toggleReadButton.classList.add('not-read-btn');
+    toggleReadButton.textContent = 'Not Read';
 
     const editButton = document.createElement('button');
     cardButtons.appendChild(editButton);
@@ -123,11 +126,10 @@ function iterateBooks() {
     deleteIcon.classList.add('fa-solid');
     deleteIcon.classList.add('fa-xmark');
 
-    const bookIndex = myLibrary.indexOf(book);
-    bookTitle.textContent = myLibrary[bookIndex].title;
-    bookAuthor.textContent = myLibrary[bookIndex].author;
-    bookPages.textContent = myLibrary[bookIndex].pages;
-    bookPublished.textContent = myLibrary[bookIndex].published;
+    bookTitle.textContent = item.title;
+    bookAuthor.textContent = item.author;
+    bookPages.textContent = item.pages;
+    bookPublished.textContent = item.published;
   }
 }
 
@@ -144,19 +146,15 @@ addBookForm.addEventListener('submit', (e) => {
   const readStatus = document.querySelector('#read-status').value;
 
   const newBook = new Book(title, author, pages, publishedDate, readStatus);
-
-  const booksMain = document.querySelector('.books');
-
   myLibrary.push(newBook);
+  displayBook();
   addBookForm.reset();
-  booksMain.replaceChildren();
-  iterateBooks();
   modal.close();
 
   // if (book.status === 'read') {
-  //   const notReadButton = document.querySelector('.not-read-btn');
-  //   notReadButton.textContent = 'Read';
-  //   notReadButton.classList.remove('not-read-btn');
-  //   notReadButton.classList.add('read-btn');
+  //   const toggleReadButton = document.querySelector('.not-read-btn');
+  //   toggleReadButton.textContent = 'Read';
+  //   toggleReadButton.classList.remove('not-read-btn');
+  //   toggleReadButton.classList.add('read-btn');
   // }
 });
