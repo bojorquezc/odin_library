@@ -40,23 +40,39 @@ function Book(title, author, pages, published, status) {
   this.status = status;
 }
 
+Book.prototype.read = function updateReadStatus() {
+  const notReadButton = document.querySelector('.not-read-btn');
+  notReadButton.addEventListener('click', () => {
+    if (notReadButton.textContent === 'Not Read') {
+      notReadButton.textContent = 'Read';
+      notReadButton.classList.remove('not-read-btn');
+      notReadButton.classList.add('read-btn');
+    } else {
+      notReadButton.textContent = 'Not Read';
+      notReadButton.classList.remove('read-btn');
+      notReadButton.classList.add('not-read-btn');
+    }
+  }
+)};
+
 // Update not read or read button
-function updateReadStatus() {
-  const notReadButtonAll = document.querySelectorAll('.not-read-btn');
-  notReadButtonAll.forEach((button) => {
-    button.addEventListener('click', () => {
-      if (button.textContent === 'Not Read') {
-        button.textContent = 'Read';
-        button.classList.remove('not-read-btn');
-        button.classList.add('read-btn');
-      } else {
-        button.textContent = 'Not Read';
-        button.classList.remove('read-btn');
-        button.classList.add('not-read-btn');
-      }
-    });
-  });
-}
+// function updateReadStatus() {
+//   const notReadButtonAll = document.querySelectorAll('.not-read-btn');
+//   notReadButtonAll.forEach((button) => {
+//     button.addEventListener('click', () => {
+//       if (button.textContent === 'Not Read') {
+//         button.textContent = 'Read';
+//         button.classList.remove('not-read-btn');
+//         button.classList.add('read-btn');
+//       } else {
+//         button.textContent = 'Not Read';
+//         button.classList.remove('read-btn');
+//         button.classList.add('not-read-btn');
+//       }
+//     });
+//   });
+// }
+
 
 // Showing library array in main display
 function iterateBooks() {
