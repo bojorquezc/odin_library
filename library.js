@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-syntax */
@@ -40,7 +41,7 @@ function Book(title, author, pages, published, status) {
   this.status = status;
 }
 
-Book.prototype.read = function updateReadStatus() {
+Book.prototype.read = function () {
   const notReadButton = document.querySelector('.not-read-btn');
   notReadButton.addEventListener('click', () => {
     if (notReadButton.textContent === 'Not Read') {
@@ -52,27 +53,8 @@ Book.prototype.read = function updateReadStatus() {
       notReadButton.classList.remove('read-btn');
       notReadButton.classList.add('not-read-btn');
     }
-  }
-)};
-
-// Update not read or read button
-// function updateReadStatus() {
-//   const notReadButtonAll = document.querySelectorAll('.not-read-btn');
-//   notReadButtonAll.forEach((button) => {
-//     button.addEventListener('click', () => {
-//       if (button.textContent === 'Not Read') {
-//         button.textContent = 'Read';
-//         button.classList.remove('not-read-btn');
-//         button.classList.add('read-btn');
-//       } else {
-//         button.textContent = 'Not Read';
-//         button.classList.remove('read-btn');
-//         button.classList.add('not-read-btn');
-//       }
-//     });
-//   });
-// }
-
+  });
+};
 
 // Showing library array in main display
 function iterateBooks() {
@@ -161,15 +143,15 @@ addBookForm.addEventListener('submit', (e) => {
   const publishedDate = document.querySelector('#published-date').value;
   const readStatus = document.querySelector('#read-status').value;
 
-  const book = new Book(title, author, pages, publishedDate, readStatus);
+  const newBook = new Book(title, author, pages, publishedDate, readStatus);
 
   const booksMain = document.querySelector('.books');
 
-  myLibrary.push(book);
+  myLibrary.push(newBook);
   addBookForm.reset();
   booksMain.replaceChildren();
   iterateBooks();
-  updateReadStatus();
+  modal.close();
 
   // if (book.status === 'read') {
   //   const notReadButton = document.querySelector('.not-read-btn');
@@ -177,6 +159,4 @@ addBookForm.addEventListener('submit', (e) => {
   //   notReadButton.classList.remove('not-read-btn');
   //   notReadButton.classList.add('read-btn');
   // }
-
-  modal.close();
 });
