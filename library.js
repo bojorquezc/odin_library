@@ -15,23 +15,10 @@ closeModal.addEventListener('click', () => {
   modal.close();
 });
 
+const booksMain = document.querySelector('.books');
+
 // eslint-disable-next-line prefer-const
-let myLibrary = [
-  // {
-  //   title: 'Dracula',
-  //   author: 'Bram Stoker',
-  //   pages: '418',
-  //   published: '1897',
-  //   status: 'Not Read',
-  // },
-  // {
-  //   title: 'Don Quixote',
-  //   author: 'Miguel de Cervantes',
-  //   pages: '1072',
-  //   published: '1605',
-  //   status: 'Not Read',
-  // },
-];
+let myLibrary = [];
 
 function Book(title, author, pages, published, status) {
   this.title = title;
@@ -43,28 +30,46 @@ function Book(title, author, pages, published, status) {
 
 Book.prototype.read = function () {
   const toggleReadButton = document.querySelectorAll('.toggle-read-btn');
-  toggleReadButton.forEach((item) => {
-    item.addEventListener('click', () => {
-      if (item.textContent === 'Not Read') {
-        item.textContent = 'Read';
-        item.classList.remove('not-read-btn');
-        item.classList.add('read-btn');
+  toggleReadButton.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (button.textContent === 'Not Read') {
+        button.textContent = 'Read';
+        button.classList.remove('not-read-btn');
+        button.classList.add('read-btn');
       } else {
-        item.textContent = 'Not Read';
-        item.classList.remove('read-btn');
-        item.classList.add('not-read-btn');
+        button.textContent = 'Not Read';
+        button.classList.remove('read-btn');
+        button.classList.add('not-read-btn');
       }
+    });
+  });
+};
+
+Book.prototype.removeBook = function () {
+  const deleteButton = document.querySelectorAll('.delete-btn');
+  deleteButton.forEach((button) => {
+    button.addEventListener('click', () => {
+      const dataSetTitle = button.dataset.booktitle;
+      myLibrary.forEach((book) => {
+        const bookIndex = myLibrary.indexOf(book);
+        if (dataSetTitle === book.title) {
+          myLibrary.splice(bookIndex, 1);
+        }
+        booksMain.replaceChildren();
+        displayBook();
+        Book.prototype.read();
+        Book.prototype.removeBook();
+      });
     });
   });
 };
 
 // Showing library array in main display
 function displayBook() {
-  const booksMain = document.querySelector('.books');
-
-  for (item of myLibrary) {
+  for (book of myLibrary) {
     const unreadCard = document.createElement('div');
     unreadCard.classList.add('unread-card');
+    unreadCard.dataset.booktitle = book.title;
     booksMain.appendChild(unreadCard);
 
     const bookInfo = document.createElement('div');
@@ -121,15 +126,16 @@ function displayBook() {
     const deleteButton = document.createElement('button');
     cardButtons.appendChild(deleteButton);
     deleteButton.classList.add('delete-btn');
+    deleteButton.dataset.booktitle = book.title;
     const deleteIcon = document.createElement('i');
     deleteButton.appendChild(deleteIcon);
     deleteIcon.classList.add('fa-solid');
     deleteIcon.classList.add('fa-xmark');
 
-    bookTitle.textContent = item.title;
-    bookAuthor.textContent = item.author;
-    bookPages.textContent = item.pages;
-    bookPublished.textContent = item.published;
+    bookTitle.textContent = book.title;
+    bookAuthor.textContent = book.author;
+    bookPages.textContent = book.pages;
+    bookPublished.textContent = book.published;
   }
 }
 
@@ -146,8 +152,12 @@ addBookForm.addEventListener('submit', (e) => {
   const readStatus = document.querySelector('#read-status').value;
 
   const newBook = new Book(title, author, pages, publishedDate, readStatus);
+
+  booksMain.replaceChildren();
   myLibrary.push(newBook);
   displayBook();
+  Book.prototype.read();
+  Book.prototype.removeBook();
   addBookForm.reset();
   modal.close();
 
@@ -158,3 +168,21 @@ addBookForm.addEventListener('submit', (e) => {
   //   toggleReadButton.classList.add('read-btn');
   // }
 });
+
+const toggleDisplay = function () {
+  const toggleReadButton = document.querySelectorAll('.toggle-read-btn');
+  toggleReadButton.forEach((button) => {
+    myLibrary.forEach((book) => {
+      const index = myLibrary.indexOf(book);
+      if (book[index].status === 'read') {
+        button.textContent = 'Read';
+        button.classList.remove('.not-read-btn');
+        button.classList.add('read-btn');
+      } else {
+        button.textContent = 'Not Read';
+        button.classList.remove('read-btn');
+        button.classList.add('.not-read-btn');
+      }
+    });
+  });
+};
