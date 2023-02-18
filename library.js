@@ -113,6 +113,7 @@ function displayBook() {
     cardButtons.appendChild(toggleReadButton);
     toggleReadButton.classList.add('toggle-read-btn');
     toggleReadButton.classList.add('not-read-btn');
+    toggleReadButton.dataset.booktitle = book.title;
     toggleReadButton.textContent = 'Not Read';
 
     const editButton = document.createElement('button');
@@ -160,29 +161,22 @@ addBookForm.addEventListener('submit', (e) => {
   Book.prototype.removeBook();
   addBookForm.reset();
   modal.close();
-
-  // if (book.status === 'read') {
-  //   const toggleReadButton = document.querySelector('.not-read-btn');
-  //   toggleReadButton.textContent = 'Read';
-  //   toggleReadButton.classList.remove('not-read-btn');
-  //   toggleReadButton.classList.add('read-btn');
-  // }
 });
 
 const toggleDisplay = function () {
   const toggleReadButton = document.querySelectorAll('.toggle-read-btn');
   toggleReadButton.forEach((button) => {
     myLibrary.forEach((book) => {
-      const index = myLibrary.indexOf(book);
-      if (book[index].status === 'read') {
-        button.textContent = 'Read';
-        button.classList.remove('.not-read-btn');
-        button.classList.add('read-btn');
-      } else {
-        button.textContent = 'Not Read';
-        button.classList.remove('read-btn');
-        button.classList.add('.not-read-btn');
-      }
+      console.log(book.title);
+      button.textContent = book.status;
     });
+  });
+};
+
+const checkStatus = function () {
+  myLibrary.forEach((book) => {
+    if (book.status === 'read') {
+      console.log(book.title);
+    }
   });
 };
