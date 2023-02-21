@@ -154,6 +154,7 @@ Book.prototype.removeBook = function () {
         book.read();
         book.removeBook();
         book.readToggle();
+        book.bookCounter();
       });
     });
   });
@@ -168,15 +169,33 @@ Book.prototype.readToggle = function () {
         button.classList.remove('not-read-btn');
         button.classList.add('read-btn');
         Book.prototype.updateStatus();
+        Book.prototype.bookCounter();
       } else {
         button.textContent = 'Not Read';
         button.classList.remove('read-btn');
         button.classList.add('not-read-btn');
         Book.prototype.updateStatus();
+        Book.prototype.bookCounter();
       }
     });
   });
 };
+
+Book.prototype.bookCounter = function () {
+  let toReadBooksCounter = 0;
+  let readBooksCounter = 0;
+  const toReadBooks = document.querySelector('.books-to-read');
+  const readBooks = document.querySelector('.books-read');
+  myLibrary.forEach((book) => {
+    if (book.status === 'read') {
+      readBooksCounter += 1;
+    } else if (book.status === 'not-read') {
+      toReadBooksCounter += 1;
+    }
+    toReadBooks.textContent = toReadBooksCounter.toString();
+    readBooks.textContent = readBooksCounter.toString();
+  })
+}
 
 // Adding book object to array
 const addBookForm = document.querySelector('.add-book-form');
@@ -198,6 +217,7 @@ addBookForm.addEventListener('submit', (e) => {
   Book.prototype.removeBook();
   Book.prototype.read();
   Book.prototype.readToggle();
+  Book.prototype.bookCounter();
   addBookForm.reset();
   modal.close();
 });
