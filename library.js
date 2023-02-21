@@ -28,20 +28,16 @@ function Book(title, author, pages, published, status) {
   this.status = status;
 }
 
-Book.prototype.read = function () {
+Book.prototype.updateStatus = function () {
   const toggleReadButton = document.querySelectorAll('.toggle-read-btn');
   toggleReadButton.forEach((button) => {
     const dataSetTitle = button.dataset.booktitle;
     myLibrary.forEach((book) => {
       if (dataSetTitle === book.title) {
-        if (book.status === 'read') {
-          button.textContent = 'Read';
-          button.classList.add('read-btn');
-          button.classList.remove('.not-read-btn');
-        } else if (book.status === 'not-read') {
-          button.textContent = 'Not Read';
-          button.classList.add('not-read-btn');
-          button.classList.remove('read-btn');
+        if (button.textContent === 'Read') {
+          book.status = 'read';
+        } else if (button.textContent === 'Not Read') {
+          book.status = 'not-read';
         }
       }
     });
@@ -124,6 +120,26 @@ function displayBook() {
   });
 }
 
+Book.prototype.read = function () {
+  const toggleReadButton = document.querySelectorAll('.toggle-read-btn');
+  toggleReadButton.forEach((button) => {
+    const dataSetTitle = button.dataset.booktitle;
+    myLibrary.forEach((book) => {
+      if (dataSetTitle === book.title) {
+        if (book.status === 'read') {
+          button.textContent = 'Read';
+          button.classList.add('read-btn');
+          button.classList.remove('.not-read-btn');
+        } else if (book.status === 'not-read') {
+          button.textContent = 'Not Read';
+          button.classList.add('not-read-btn');
+          button.classList.remove('read-btn');
+        }
+      }
+    });
+  });
+};
+
 Book.prototype.removeBook = function () {
   const deleteButton = document.querySelectorAll('.delete-btn');
   deleteButton.forEach((button) => {
@@ -137,7 +153,27 @@ Book.prototype.removeBook = function () {
         displayBook();
         book.read();
         book.removeBook();
+        book.readToggle();
       });
+    });
+  });
+};
+
+Book.prototype.readToggle = function () {
+  const toggleReadButton = document.querySelectorAll('.toggle-read-btn');
+  toggleReadButton.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (button.textContent === 'Not Read') {
+        button.textContent = 'Read';
+        button.classList.remove('not-read-btn');
+        button.classList.add('read-btn');
+        Book.prototype.updateStatus();
+      } else {
+        button.textContent = 'Not Read';
+        button.classList.remove('read-btn');
+        button.classList.add('not-read-btn');
+        Book.prototype.updateStatus();
+      }
     });
   });
 };
@@ -161,18 +197,7 @@ addBookForm.addEventListener('submit', (e) => {
   displayBook();
   Book.prototype.removeBook();
   Book.prototype.read();
+  Book.prototype.readToggle();
   addBookForm.reset();
   modal.close();
 });
-
-// button.addEventListener('click', () => {
-//   if (button.textContent === 'Not Read') {
-//     button.textContent = 'Read';
-//     button.classList.remove('not-read-btn');
-//     button.classList.add('read-btn');
-//   } else {
-//     button.textContent = 'Not Read';
-//     button.classList.remove('read-btn');
-//     button.classList.add('not-read-btn');
-//   }
-// });
