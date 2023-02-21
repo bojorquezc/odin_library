@@ -31,15 +31,10 @@ function Book(title, author, pages, published, status) {
 Book.prototype.read = function () {
   const toggleReadButton = document.querySelectorAll('.toggle-read-btn');
   toggleReadButton.forEach((button) => {
-    button.addEventListener('click', () => {
-      if (button.textContent === 'Not Read') {
-        button.textContent = 'Read';
-        button.classList.remove('not-read-btn');
-        button.classList.add('read-btn');
-      } else {
-        button.textContent = 'Not Read';
-        button.classList.remove('read-btn');
-        button.classList.add('not-read-btn');
+    const dataSetTitle = button.dataset.booktitle;
+    myLibrary.forEach((book) => {
+      if (dataSetTitle === book.title) {
+        button.textContent = book.status;
       }
     });
   });
@@ -50,15 +45,15 @@ Book.prototype.removeBook = function () {
   deleteButton.forEach((button) => {
     button.addEventListener('click', () => {
       const dataSetTitle = button.dataset.booktitle;
-      myLibrary.forEach((book) => {
-        const bookIndex = myLibrary.indexOf(book);
+      myLibrary.forEach((book, index) => {
+        // const bookIndex = myLibrary.indexOf(book);
         if (dataSetTitle === book.title) {
-          myLibrary.splice(bookIndex, 1);
+          myLibrary.splice(index, 1);
         }
         booksMain.replaceChildren();
         displayBook();
-        Book.prototype.read();
-        Book.prototype.removeBook();
+        book.read();
+        book.removeBook();
       });
     });
   });
@@ -66,7 +61,7 @@ Book.prototype.removeBook = function () {
 
 // Showing library array in main display
 function displayBook() {
-  for (book of myLibrary) {
+  myLibrary.forEach((book) => {
     const unreadCard = document.createElement('div');
     unreadCard.classList.add('unread-card');
     unreadCard.dataset.booktitle = book.title;
@@ -137,7 +132,7 @@ function displayBook() {
     bookAuthor.textContent = book.author;
     bookPages.textContent = book.pages;
     bookPublished.textContent = book.published;
-  }
+  });
 }
 
 // Adding book object to array
@@ -157,8 +152,10 @@ addBookForm.addEventListener('submit', (e) => {
   booksMain.replaceChildren();
   myLibrary.push(newBook);
   displayBook();
-  Book.prototype.read();
   Book.prototype.removeBook();
+  myLibrary.forEach((book) => {
+    book.read();
+  });
   addBookForm.reset();
   modal.close();
 });
@@ -180,3 +177,15 @@ const checkStatus = function () {
     }
   });
 };
+
+// button.addEventListener('click', () => {
+//   if (button.textContent === 'Not Read') {
+//     button.textContent = 'Read';
+//     button.classList.remove('not-read-btn');
+//     button.classList.add('read-btn');
+//   } else {
+//     button.textContent = 'Not Read';
+//     button.classList.remove('read-btn');
+//     button.classList.add('not-read-btn');
+//   }
+// });
