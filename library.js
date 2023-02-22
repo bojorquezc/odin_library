@@ -6,8 +6,12 @@
 const modal = document.querySelector('.modal');
 const openModal = document.querySelector('.add-book-btn');
 const closeModal = document.querySelector('.close-modal');
+const formTitle = document.querySelector('.form-title');
+const submitButton = document.querySelector('.submit-btn');
 
 openModal.addEventListener('click', () => {
+  formTitle.textContent = 'Add a book to Library';
+  submitButton.textContent = 'Add Book';
   modal.showModal();
 });
 
@@ -99,6 +103,7 @@ function displayBook() {
     const editButton = document.createElement('button');
     cardButtons.appendChild(editButton);
     editButton.classList.add('edit-btn');
+    editButton.dataset.booktitle = book.title;
     const editIcon = document.createElement('i');
     editButton.appendChild(editIcon);
     editIcon.classList.add('fa-solid');
@@ -194,30 +199,86 @@ Book.prototype.bookCounter = function () {
     }
     toReadBooks.textContent = toReadBooksCounter.toString();
     readBooks.textContent = readBooksCounter.toString();
-  })
-}
+  });
+};
 
-// Adding book object to array
+// Adding or editing book object in array
 const addBookForm = document.querySelector('.add-book-form');
 
 addBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const title = document.querySelector('#title').value;
-  const author = document.querySelector('#author').value;
-  const pages = document.querySelector('#pages').value;
-  const publishedDate = document.querySelector('#published-date').value;
-  const readStatus = document.querySelector('#read-status').value;
+  const title = document.querySelector('#title');
+  const author = document.querySelector('#author');
+  const pages = document.querySelector('#pages');
+  const publishedDate = document.querySelector('#published-date');
+  const readStatus = document.querySelector('#read-status');
+  const editButton = document.querySelectorAll('.edit-btn');
+  // const submitButton = document.querySelector('.submit-btn');
 
-  const newBook = new Book(title, author, pages, publishedDate, readStatus);
+  if (submitButton.textContent === 'Edit Book') {
+    editButton.forEach((button) => {
+      const dataSetTitle = button.dataset.booktitle;
+      myLibrary.forEach((book) => {
+        if (dataSetTitle === book.title) {
+          book.title = title.value;
+          book.author = author.value;
+          book.pages = pages.value;
+          book.published = publishedDate.value;
+          book.status = readStatus.value;
+          booksMain.replaceChildren();
+          displayBook();
+          Book.prototype.removeBook();
+          Book.prototype.read();
+          Book.prototype.readToggle();
+          Book.prototype.bookCounter();
+          addBookForm.reset();
+          modal.close();
+        }
+      });
+    });
+  } else {
+    // eslint-disable-next-line max-len
+    const newBook = new Book(title.value, author.value, pages.value, publishedDate.value, readStatus.value);
 
-  booksMain.replaceChildren();
-  myLibrary.push(newBook);
-  displayBook();
-  Book.prototype.removeBook();
-  Book.prototype.read();
-  Book.prototype.readToggle();
-  Book.prototype.bookCounter();
-  addBookForm.reset();
-  modal.close();
+    booksMain.replaceChildren();
+    myLibrary.push(newBook);
+    displayBook();
+    Book.prototype.removeBook();
+    Book.prototype.read();
+    Book.prototype.readToggle();
+    Book.prototype.bookCounter();
+    addBookForm.reset();
+    modal.close();
+  }
 });
+
+Book.prototype.editBook = function () {
+  // const addBookForm = document.querySelector('.add-book-form');
+  const title = document.querySelector('#title');
+  const author = document.querySelector('#author');
+  const pages = document.querySelector('#pages');
+  const publishedDate = document.querySelector('#published-date');
+  const readStatus = document.querySelector('#read-status');
+  const editButton = document.querySelectorAll('.edit-btn');
+  // const formTitle = document.querySelector('.form-title');
+  // const submitButton = document.querySelector('.submit-btn');
+
+  editButton.forEach((button) => {
+    button.addEventListener('click', () => {
+      const dataSetTitle = button.dataset.booktitle;
+      myLibrary.forEach((book) => {
+        if (dataSetTitle === book.title) {
+          title.value = book.title;
+          author.value = book.author;
+          pages.value = book.pages;
+          publishedDate.value = book.published;
+          readStatus.value = book.status;
+          formTitle.textContent = 'Edit Book Entry';
+          submitButton.textContent = 'Edit Book';
+          modal.showModal();
+        }
+      });
+    });
+  });
+};
