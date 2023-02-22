@@ -8,6 +8,13 @@ const openModal = document.querySelector('.add-book-btn');
 const closeModal = document.querySelector('.close-modal');
 const formTitle = document.querySelector('.form-title');
 const submitButton = document.querySelector('.submit-btn');
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const publishedDate = document.querySelector('#published-date');
+const readStatus = document.querySelector('#read-status');
+const editButton = document.querySelectorAll('.edit-btn');
+const booksMain = document.querySelector('.books');
 
 openModal.addEventListener('click', () => {
   formTitle.textContent = 'Add a book to Library';
@@ -19,11 +26,10 @@ closeModal.addEventListener('click', () => {
   modal.close();
 });
 
-const booksMain = document.querySelector('.books');
-
 // eslint-disable-next-line prefer-const
 let myLibrary = [];
 
+// eslint-disable-next-line no-shadow
 function Book(title, author, pages, published, status) {
   this.title = title;
   this.author = author;
@@ -208,14 +214,6 @@ const addBookForm = document.querySelector('.add-book-form');
 addBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const title = document.querySelector('#title');
-  const author = document.querySelector('#author');
-  const pages = document.querySelector('#pages');
-  const publishedDate = document.querySelector('#published-date');
-  const readStatus = document.querySelector('#read-status');
-  const editButton = document.querySelectorAll('.edit-btn');
-  // const submitButton = document.querySelector('.submit-btn');
-
   if (submitButton.textContent === 'Edit Book') {
     editButton.forEach((button) => {
       const dataSetTitle = button.dataset.booktitle;
@@ -254,16 +252,6 @@ addBookForm.addEventListener('submit', (e) => {
 });
 
 Book.prototype.editBook = function () {
-  // const addBookForm = document.querySelector('.add-book-form');
-  const title = document.querySelector('#title');
-  const author = document.querySelector('#author');
-  const pages = document.querySelector('#pages');
-  const publishedDate = document.querySelector('#published-date');
-  const readStatus = document.querySelector('#read-status');
-  const editButton = document.querySelectorAll('.edit-btn');
-  // const formTitle = document.querySelector('.form-title');
-  // const submitButton = document.querySelector('.submit-btn');
-
   editButton.forEach((button) => {
     button.addEventListener('click', () => {
       const dataSetTitle = button.dataset.booktitle;
