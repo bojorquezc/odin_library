@@ -215,43 +215,47 @@ addBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   if (submitButton.textContent === 'Edit Book') {
+    const editButton = document.querySelectorAll('.edit-btn');
     editButton.forEach((button) => {
       const dataSetTitle = button.dataset.booktitle;
+      console.log(`dataSetTitle: ${dataSetTitle}`);
       myLibrary.forEach((book) => {
         if (dataSetTitle === book.title) {
+          console.log(`book.title: ${book.title}`)
           book.title = title.value;
           book.author = author.value;
           book.pages = pages.value;
           book.published = publishedDate.value;
           book.status = readStatus.value;
-          booksMain.replaceChildren();
-          displayBook();
-          Book.prototype.removeBook();
-          Book.prototype.read();
-          Book.prototype.readToggle();
-          Book.prototype.bookCounter();
-          addBookForm.reset();
-          modal.close();
         }
       });
     });
+    // booksMain.replaceChildren();
+    // displayBook();
+    // Book.prototype.removeBook();
+    // Book.prototype.read();
+    // Book.prototype.readToggle();
+    // Book.prototype.bookCounter();
+    // addBookForm.reset();
+    // modal.close();
   } else {
     // eslint-disable-next-line max-len
     const newBook = new Book(title.value, author.value, pages.value, publishedDate.value, readStatus.value);
-
-    booksMain.replaceChildren();
     myLibrary.push(newBook);
-    displayBook();
-    Book.prototype.removeBook();
-    Book.prototype.read();
-    Book.prototype.readToggle();
-    Book.prototype.bookCounter();
-    addBookForm.reset();
-    modal.close();
   }
+  booksMain.replaceChildren();
+  displayBook();
+  Book.prototype.removeBook();
+  Book.prototype.read();
+  Book.prototype.readToggle();
+  Book.prototype.bookCounter();
+  addBookForm.reset();
+  modal.close();
+  console.log('end submit');
 });
 
 Book.prototype.editBook = function () {
+  const editButton = document.querySelectorAll('.edit-btn');
   editButton.forEach((button) => {
     button.addEventListener('click', () => {
       const dataSetTitle = button.dataset.booktitle;
