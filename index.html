@@ -30,36 +30,46 @@
                 <p class="form-title">Add a book to Library</p>
                 <div class="form-field">
                     <label for="title">Title:</label>
-                    <input type="text" id="title" placeholder="Book title">    
+                    <input type="text" id="title" placeholder="Book title">
                 </div>
                 <div class="form-field">
                     <label for="author">Author:</label>
-                    <input type="text" id="author" placeholder="Book author">    
+                    <input type="text" id="author" placeholder="Book author">
                 </div>
                 <div class="form-field">
                     <label for="pages">Pages:</label>
-                    <input type="number" id="pages" placeholder="Number of pages">    
+                    <input type="number" id="pages" placeholder="Number of pages">
                 </div>
                 <div class="form-field">
                     <label for="published-date">Published date:</label>
-                    <input type="number" id="published-date" placeholder="Published date" max="2500">    
+                    <input type="number" id="published-date" placeholder="Published date" max="2500">
                 </div>
                 <div class="read-status form-field">
                     <label for="read-status">Read status</label>
                     <select name="read-status" id="read-status">
                         <option value="read">Read</option>
                         <option value="not-read">Not Read</option>
-                    </select>  
+                    </select>
                 </div>
                 <button type="submit" class="submit-btn">Add Book</button>
             </form>
         </dialog>
-        <h3>Books To Read: <span class ='books-to-read'>0</span></h3>
-        <h3>Books Read: <span class ='books-read'>0</span></h3>
+        <h3>Books To Read: <span class='books-to-read'>0</span></h3>
+        <h3>Books Read: <span class='books-read'>0</span></h3>
     </div>
 
     <div class="books">
+        <div class="start-message">
+            <h1 class="start-instructions">Add a book by using the "+" button.</h1>
+        </div>
     </div>
+    <!--FOOTER SECTION-->
+    <footer>
+        <p>Copyright © <a href="https://www.theodinproject.com/">The Odin Project </a>
+            <script>document.write(new Date().getFullYear())</script> | Created by <a
+                href="https://github.com/bojorquezc">Conrado Bojorquez</a>
+        </p>
+    </footer>
 </body>
 
 </html>

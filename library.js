@@ -16,6 +16,8 @@ const pages = document.querySelector('#pages');
 const publishedDate = document.querySelector('#published-date');
 const readStatus = document.querySelector('#read-status');
 const booksMain = document.querySelector('.books');
+const toReadBooks = document.querySelector('.books-to-read');
+const readBooks = document.querySelector('.books-read');
 
 // Modal functionality
 openModal.addEventListener('click', () => {
@@ -40,6 +42,22 @@ function Book(title, author, pages, published, status) {
 }
 
 // Showing library array in main display
+function startInstructions() {
+  if (myLibrary.length === 0) {
+    const startMessage = document.createElement('div');
+    startMessage.classList.add('start-message');
+    booksMain.appendChild(startMessage);
+
+    const startInstructions = document.createElement('h1');
+    startInstructions.classList.add('start-instructions');
+    startInstructions.textContent = 'Add a book by using the "+" button.';
+    startMessage.appendChild(startInstructions);
+
+    toReadBooks.textContent = '0';
+    readBooks.textContent = '0';
+  }
+}
+
 function displayBook() {
   myLibrary.forEach((book) => {
     const unreadCard = document.createElement('div');
@@ -83,11 +101,9 @@ function displayBook() {
     cardButtons.classList.add('card-buttons');
     unreadCard.appendChild(cardButtons);
 
-    // eslint-disable-next-line no-shadow
     const toggleReadButton = document.createElement('button');
     cardButtons.appendChild(toggleReadButton);
     toggleReadButton.classList.add('toggle-read-btn');
-    // toggleReadButton.classList.add('not-read-btn');
     toggleReadButton.dataset.booktitle = book.title;
     toggleReadButton.textContent = 'Not Read';
 
@@ -183,6 +199,7 @@ Book.prototype.removeBook = function () {
           myLibrary.splice(index, 1);
         }
         booksMain.replaceChildren();
+        startInstructions();
         displayBook();
         Book.prototype.removeBook();
         Book.prototype.read();
@@ -197,8 +214,6 @@ Book.prototype.removeBook = function () {
 Book.prototype.bookCounter = function () {
   let toReadBooksCounter = 0;
   let readBooksCounter = 0;
-  const toReadBooks = document.querySelector('.books-to-read');
-  const readBooks = document.querySelector('.books-read');
   myLibrary.forEach((book) => {
     if (book.status === 'read') {
       readBooksCounter += 1;
