@@ -185,11 +185,12 @@ form > .submit-btn {
 }
 
 .under-nav {
-	display: grid;
+	display: flex;
 	padding-bottom: 2rem;
     align-items: center;
-    grid-template-columns: 25% 1fr 1fr 1fr 1fr 25%;
     justify-items: center;
+	justify-content: center;
+	gap: 30px;
 }
 
 .books-read-cont {
@@ -215,6 +216,10 @@ form > .submit-btn {
     width: 50px;
 }
 
+.sample-btn-cont {
+	grid-column: 5/6;
+}
+
 .add-sample-btn {
 	background-color: #254c83;
 	border-radius: 4px;
@@ -223,21 +228,25 @@ form > .submit-btn {
 	color: white;
 	font-size: 1rem;
 	font-weight: 600;
-	grid-column: 5/6;;
 	padding: 10px;
 	width: 75%;
+	max-width: 200px;
+}
+
+.add-sample-btn-hide {
+	display: none;
 }
 
 .books {
 	display: grid;
 	gap: 2rem;
-	grid-template-columns: repeat(4,1fr);
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	padding: 3rem 4rem;
 	
 }
 
 .start-message {
-	grid-column: 2/4;
+	grid-column: 1/-1;
 	text-align: center;
 }
 
@@ -352,10 +361,6 @@ footer {
 }
 
 @media (max-width: 767px) {
-
-	body {
-		background-attachment: fixed;
-	}
 
 	.books {
 		display: flex;
