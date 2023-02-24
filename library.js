@@ -53,6 +53,11 @@ function startInstructions() {
     startInstructions.textContent = 'Add a book by using the "+" button.';
     startMessage.appendChild(startInstructions);
 
+    const sampleInstructions = document.createElement('p');
+    sampleInstructions.classList.add('sample-content-instructions');
+    sampleInstructions.textContent = 'Or add some sample books with "Add Sample Content" button.';
+    startMessage.appendChild(sampleInstructions);
+
     toReadBooks.textContent = '0';
     readBooks.textContent = '0';
   }
@@ -277,4 +282,29 @@ addBookForm.addEventListener('submit', (e) => {
   Book.prototype.bookCounter();
   addBookForm.reset();
   modal.close();
+});
+
+function sampleData() {
+  if (myLibrary.length === 0) {
+    const lotr = new Book('LOTR', 'J.R.R. Tolkien', '1178', '1954', 'not-read');
+    myLibrary.push(lotr);
+    const dracula = new Book('Dracula', 'Bram Stoker', '418', '1897', 'not-read');
+    myLibrary.push(dracula);
+    const animalFarm = new Book('Animal Farm', 'George Orwell', '140', '1945', 'read');
+    myLibrary.push(animalFarm);
+    const theArtOfRacing = new Book('The Art Of Racing In The Rain', 'Garth Stein', '336', '2008', 'read');
+    myLibrary.push(theArtOfRacing);
+    booksMain.replaceChildren();
+    displayBook();
+    Book.prototype.removeBook();
+    Book.prototype.read();
+    Book.prototype.readToggle();
+    Book.prototype.editBook();
+    Book.prototype.bookCounter();
+  }
+}
+
+const addSampleButton = document.querySelector('.add-sample-btn');
+addSampleButton.addEventListener('click', () => {
+  sampleData();
 });

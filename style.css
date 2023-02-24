@@ -183,21 +183,44 @@ form > .submit-btn {
 	display: grid;
 	padding-bottom: 2rem;
     align-items: center;
-    grid-template-columns: 25% 1fr 1fr 1fr 25%;
+    grid-template-columns: 25% 1fr 1fr 1fr 1fr 25%;
     justify-items: center;
+}
+
+.books-read-cont {
+	grid-column: 3/4;
+	grid-row: 1;
+}
+
+.books-to-read-cont {
+	grid-column: 4/5;
+	grid-row: 1;
 }
 
 .add-book-btn {
 	border-radius: 30px;
 	color: #ffffff;
 	grid-column: 2/3;
-    background-color: #254C84;
+    background-color: #254c83;
     border-style: none;
     box-shadow: 0px 4px 10px 0px black;
     font-size: 2rem;
     font-weight: 600;
     height: 50px;
     width: 50px;
+}
+
+.add-sample-btn {
+	background-color: #254c83;
+	border-radius: 4px;
+	border: none;
+	box-shadow: 0px 4px 10px 0px black;
+	color: white;
+	font-size: 1rem;
+	font-weight: 600;
+	grid-column: 5/6;;
+	padding: 10px;
+	width: 75%;
 }
 
 .books {
@@ -210,6 +233,10 @@ form > .submit-btn {
 .start-message {
 	grid-column: 2/4;
 	text-align: center;
+}
+
+.sample-content-instructions {
+	padding-top: 15px;
 }
 
 .read-books {
@@ -317,3 +344,34 @@ footer {
     text-align: center;
 	font-size: 12px;
 }
+
+@media (max-width: 767px) {
+	
+	body {
+		background: linear-gradient(#254C84, #000000);
+		color: #ffffff;
+		font-family: "Inter", Arial, Helvetica, sans-serif;
+		height: 100vh;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.books {
+		display: flex;
+		flex-direction: column;
+		padding: 50px 10px 50px 10px;
+	}
+
+	.navigation {
+		padding-top: 3rem;
+	}
+
+	.under-nav {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		padding-top: 3rem;
+	}
+	
+	}
