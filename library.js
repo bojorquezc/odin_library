@@ -13,7 +13,7 @@ const submitButton = document.querySelector('.submit-btn');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
-const publishedDate = document.querySelector('#published-date');
+const publishedYear = document.querySelector('#published-year');
 const readStatus = document.querySelector('#read-status');
 const booksMain = document.querySelector('.books');
 const toReadBooks = document.querySelector('.books-to-read');
@@ -272,7 +272,7 @@ Book.prototype.editBook = function () {
           title.value = book.title;
           author.value = book.author;
           pages.value = book.pages;
-          publishedDate.value = book.published;
+          publishedYear.value = book.published;
           readStatus.value = book.status;
           submitButton.dataset.booktitle = title.value;
           formTitle.textContent = 'Edit Book Entry';
@@ -294,12 +294,12 @@ addBookForm.addEventListener('submit', (e) => {
         book.title = title.value;
         book.author = author.value;
         book.pages = pages.value;
-        book.published = publishedDate.value;
+        book.published = publishedYear.value;
         book.status = readStatus.value;
       }
     });
   } else {
-    const newBook = new Book(title.value, author.value, pages.value, publishedDate.value, readStatus.value);
+    const newBook = new Book(title.value, author.value, pages.value, publishedYear.value, readStatus.value);
     myLibrary.push(newBook);
   }
   booksMain.replaceChildren();
