@@ -49,6 +49,10 @@ table {
 
 body {
 	background: linear-gradient(#254C84, #000000);
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 	color: #ffffff;
 	font-family: "Inter", Arial, Helvetica, sans-serif;
 	height: 100vh;
@@ -166,6 +170,7 @@ form > .submit-btn {
 	flex-direction: column;
 	height: 9rem;
 	justify-content: center;
+	padding-top: 3rem;
 }
 
 .nav-title {
@@ -227,7 +232,8 @@ form > .submit-btn {
 	display: grid;
 	gap: 2rem;
 	grid-template-columns: repeat(4,1fr);
-	padding: 0 4rem;
+	padding: 3rem 4rem;
+	
 }
 
 .start-message {
@@ -346,15 +352,9 @@ footer {
 }
 
 @media (max-width: 767px) {
-	
+
 	body {
-		background: linear-gradient(#254C84, #000000);
-		color: #ffffff;
-		font-family: "Inter", Arial, Helvetica, sans-serif;
-		height: 100vh;
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
+		background-attachment: fixed;
 	}
 
 	.books {
