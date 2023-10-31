@@ -12,11 +12,11 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
+	border: 0;
+	font: inherit;
+	font-size: 100%;
 	margin: 0;
 	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -54,11 +54,11 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	color: #ffffff;
+    display: flex;
+    flex-direction: column;
 	font-family: "Inter", Arial, Helvetica, sans-serif;
 	height: 100vh;
 	min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
 a {
@@ -70,18 +70,18 @@ a:visited {
 }
 
 h1 {
-	font-weight: 600;
 	font-size: 2rem;
+	font-weight: 600;
 }
 
 h2 {
-	font-weight: 600;
 	font-size: 1.5rem;
+	font-weight: 600;
 }
 
 h3 {
-	font-weight: 600;
 	font-size: 1rem;
+	font-weight: 600;
 }
 
 hr {
@@ -90,8 +90,8 @@ hr {
 }
 
 input {
-    border-radius: 5px;
     border: solid 1px #a7a7a7;
+    border-radius: 5px;
     box-sizing: border-box;
     margin: 8px;
     padding: 8px 10px;
@@ -103,8 +103,8 @@ label {
 }
 
 form {
-	color: #ffffff;
 	background: linear-gradient(#254C84, #000000);
+	color: #ffffff;
     padding: 40px;
 }
 
@@ -117,8 +117,8 @@ form > p {
 
 form > .submit-btn {
     background-color: #307989;
-    border-radius: 5px;
     border: none;
+    border-radius: 5px;
     color: #ffffff;
     font-weight: 600;
     height: 40px;
@@ -137,28 +137,28 @@ form > .submit-btn {
 }
 
 .form-close-btn > button {
+    background-color: #b3b3b3;
 	border: none;
     border-radius: 15px;
+    color: #505050;
     height: 25px;
     width: 25px;
-    color: #505050;
-    background-color: #b3b3b3;
 }
 
 #read-status {
-    width: 95%;
-    padding: 8px 10px;
-    margin: 8px;
-    border-radius: 5px;
     border: solid 1px #a7a7a7;
+    border-radius: 5px;
     box-sizing: border-box;
+    margin: 8px;
+    padding: 8px 10px;
+    width: 95%;
 }
 
 .modal {
-	width: 310px;
-	position: absolute;
-	padding: 0;
 	border: none;
+	padding: 0;
+	position: absolute;
+	width: 310px;
 }
 
 .modal::backdrop {
@@ -175,8 +175,8 @@ form > .submit-btn {
 
 .nav-title {
 	display: flex;
-	gap: 0.7rem;
     flex-direction: row;
+	gap: 0.7rem;
     justify-content: center;
 }
 
@@ -185,12 +185,12 @@ form > .submit-btn {
 }
 
 .under-nav {
-	display: flex;
-	padding-bottom: 2rem;
     align-items: center;
-    justify-items: center;
-	justify-content: center;
+	display: flex;
 	gap: 30px;
+	justify-content: center;
+    justify-items: center;
+	padding-bottom: 2rem;
 }
 
 .books-read-cont {
@@ -204,14 +204,14 @@ form > .submit-btn {
 }
 
 .add-book-btn {
-	border-radius: 30px;
-	color: #ffffff;
-	grid-column: 2/3;
     background-color: #254c83;
+	border-radius: 30px;
     border-style: none;
     box-shadow: 0px 4px 10px 0px black;
+	color: #ffffff;
     font-size: 2rem;
     font-weight: 600;
+	grid-column: 2/3;
     height: 50px;
     width: 50px;
 }
@@ -222,15 +222,15 @@ form > .submit-btn {
 
 .add-sample-btn {
 	background-color: #254c83;
-	border-radius: 4px;
 	border: none;
+	border-radius: 4px;
 	box-shadow: 0px 4px 10px 0px black;
 	color: white;
 	font-size: 1rem;
 	font-weight: 600;
+	max-width: 200px;
 	padding: 10px;
 	width: 75%;
-	max-width: 200px;
 }
 
 .add-sample-btn-hide {
@@ -271,21 +271,21 @@ form > .submit-btn {
 }
 
 .read-tag {
-	display: flex;
-    width: 50%;
-    height: 30px;
-    font-weight: 600;
-    background-color: #8BB987;
-    justify-content: center;
     align-items: center;
+    background-color: #8BB987;
+	display: flex;
+    font-weight: 600;
+    height: 30px;
+    justify-content: center;
+    width: 50%;
 }
 
 .return-btn {
     background-color: #4F8F9D;
-    width: 20%;
     border: none;
     color: white;
     font-size: 1rem;
+    width: 20%;
 }
 
 .book-info {
@@ -294,12 +294,12 @@ form > .submit-btn {
 
 .unread-card {
 	background-color: #254C84;
+    box-shadow: 0px 4px 10px 0px black;
 	display: grid;
 	grid-template-rows: 80% 20%;
 	height: 200px;
 	min-width: 200px;
 	padding: 2rem;
-    box-shadow: 0px 4px 10px 0px black;
 }
 
 .read-card {
@@ -318,46 +318,53 @@ form > .submit-btn {
 }
 
 .not-read-btn {
-	width: 70%;
     background-color: #D2954E;
     border: none;
     color: white;
     font-size: 1rem;
     font-weight: 600;
+	width: 70%;
 }
 
 .read-btn {
-	width: 70%;
     background-color: #2bb15e;
     border: none;
     color: white;
     font-size: 1rem;
     font-weight: 600;
+	width: 70%;
 }
 
 .edit-btn {
 	background-color: #4F8F9D;
-	width: 15%;
     border: none;
     color: white;
     font-size: 1rem;
+	width: 15%;
 }
 
 .delete-btn {
 	background-color: #CF7C76;
-	font-weight: 600;
-	width: 15%;
     border: none;
     color: white;
     font-size: 1rem;
+	font-weight: 600;
+	width: 15%;
+}
+
+.form_errors {
+  background-color: black;
+  color: red;
+  padding: 1rem;
+  display: none;
 }
 
 footer {
-	margin-top: auto;
     background-color: #000000;
+	font-size: 12px;
+	margin-top: auto;
     padding: 10px 0 10px 0;
     text-align: center;
-	font-size: 12px;
 }
 
 @media (max-width: 767px) {

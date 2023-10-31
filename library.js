@@ -4,21 +4,22 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-syntax */
+const addBookForm = document.querySelector('.add-book-form');
+const addSampleButton = document.querySelector('.add-sample-btn');
+const author = document.querySelector('#author');
+const booksMain = document.querySelector('.books');
+const closeModal = document.querySelector('.close-modal');
+const formErrors = document.querySelector('.form_errors');
+const formTitle = document.querySelector('.form-title');
 const modal = document.querySelector('.modal');
 const openModal = document.querySelector('.add-book-btn');
-const closeModal = document.querySelector('.close-modal');
-const addBookForm = document.querySelector('.add-book-form');
-const formTitle = document.querySelector('.form-title');
-const submitButton = document.querySelector('.submit-btn');
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
 const publishedYear = document.querySelector('#published-year');
-const readStatus = document.querySelector('#read-status');
-const booksMain = document.querySelector('.books');
-const toReadBooks = document.querySelector('.books-to-read');
 const readBooks = document.querySelector('.books-read');
-const addSampleButton = document.querySelector('.add-sample-btn');
+const readStatus = document.querySelector('#read-status');
+const submitButton = document.querySelector('.submit-btn');
+const title = document.querySelector('#title');
+const toReadBooks = document.querySelector('.books-to-read');
 
 // Modal functionality
 openModal.addEventListener('click', () => {
@@ -30,6 +31,7 @@ openModal.addEventListener('click', () => {
 
 closeModal.addEventListener('click', () => {
   modal.close();
+  formErrors.style.display = 'none';
 });
 
 const myLibrary = [];
@@ -286,8 +288,37 @@ Book.prototype.editBook = function () {
 
 // Adding or editing book object in array
 addBookForm.addEventListener('submit', (e) => {
-  e.preventDefault();
 
+  // Validate fields with JS
+  let errorMessages = [];
+
+  if (title.value === '' || title.value == null) {
+    errorMessages.push('Book title is required');
+    formErrors.innerText = errorMessages.join(', ');
+    formErrors.style.display = 'block';
+  }
+
+  if (author.value === '' || author.value == null) {
+    errorMessages.push('Author name is required');
+    formErrors.innerText = errorMessages.join(', ');
+    formErrors.style.display = 'block';
+  }
+
+  if (pages.value === '' || pages.value == null) {
+    errorMessages.push('Number of pages is required');
+    formErrors.innerText = errorMessages.join(', ');
+    formErrors.style.display = 'block';
+  }
+
+  if (publishedYear.value === '' || publishedYear.value == null) {
+    errorMessages.push('Published year is required');
+    formErrors.innerText = errorMessages.join(', ');
+    formErrors.style.display = 'block';
+    e.preventDefault();
+    return;
+  }
+
+  // Submit if it is an edit
   if (submitButton.textContent === 'Edit Book') {
     myLibrary.forEach((book) => {
       if (submitButton.dataset.booktitle === book.title) {
@@ -299,9 +330,12 @@ addBookForm.addEventListener('submit', (e) => {
       }
     });
   } else {
+    // Submit if it is a new book
     const newBook = new Book(title.value, author.value, pages.value, publishedYear.value, readStatus.value);
     myLibrary.push(newBook);
   }
+  // Refresh the screen and general status
+  formErrors.style.display = 'none';
   booksMain.replaceChildren();
   displayBook();
   Book.prototype.removeBook();
